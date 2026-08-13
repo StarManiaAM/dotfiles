@@ -1,12 +1,16 @@
 #!/bin/sh
-if [ $(bluetoothctl show | grep "Powered: yes" | wc -c) -eq 0 ]
-then
+
+# Check if Bluetooth is powered on
+if ! bluetoothctl show | grep -q "Powered: yes"; then
+  # Powered off: Grayed out
   echo "%{F#66ffffff}"
 else
-  if [ $(echo info | bluetoothctl | grep 'Device' | wc -c) -eq 0 ]
-  then 
+  # Check if any device is actually connected
+  if echo info | bluetoothctl | grep -q "Connected: yes"; then
+    # Powered on AND Connected: Blue
+    echo "%{F#2193ff}"
+  else
+    # Powered on but Disconnected: Default color
     echo ""
   fi
-  echo "%{F#2193ff}"
 fi
-
