@@ -32,6 +32,7 @@ sudo apt install -y psmisc jq bluez xorg lightdm pipewire-audio pipewire-pulse \
     libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev libgif-dev
 
 #i3lock-color installation
+sudo apt remove -y i3lock
 info "Building and installing i3lock-color..."
 (
     cd /tmp
